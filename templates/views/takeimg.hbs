@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reference Images</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+       
+    </head>
+    <style>
+        .dynamic{
+            margin-top: 20px;
+            margin-left: 17px;
+            width:252px ;
+            height: 190px;
+        }
+    </style>
+    <body>
+        <p><span id="errorMsg"></span></p>
+    
+        <!-- Stream video via webcam -->
+        <div style="  width: 100%;
+        text-align: center; padding-top:1cm;">
+            <video style="margin-top: -10px;" id="video" playsinline autoplay></video>
+        </div>
+        
+
+        <!-- Trigger canvas web API -->
+        <div style="  width: 100%;
+        text-align: center;" id="btn" >
+      
+
+            <a id="link"  >  <button id="snap"  class="btn btn-success">Capture</button> </a>
+            <form action="/xyz" method="POST">
+     <input  id ="vv" type="hidden"  name="f" >
+       </form>
+        </div>
+         
+       
+        
+        {{!-- <button id="snap" type="button" class="btn btn-success">Capture</button> --}}
+     {{!-- <a id="link"></a> --}}
+<div style="position:absolute; left:507px" id="btn"></div>
+        <!-- Webcam video snapshot -->
+        <div id="add"></div>
+        <!-- <canvas id="canvas" width="180" height="110"></canvas> -->
+        
+
+<script  async>
+
+
+           'use strict';
+
+    const video = document.getElementById('video');
+    const snap = document.getElementById("snap");
+    const errorMsgElement = document.querySelector('span#errorMsg');
+    
+    const constraints = {
+        audio: true,
+        video: {
+    
+        
+            width: 600, height: 350
+        }
+    };
+    
+    // Access webcam
+    async function init() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        } catch (e) {
+            errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+        }
+    }
+    
+    // Success
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+    }
+    
+    // Load init
+    init();
+    
+    // Draw image
+    var link = document.getElementById('link');
+    var count=0;
+    var bclick=document.getElementById('btn');
+    snap.addEventListener("click", function() {
+        count++;
+        if(count==5)
+            {  
+                
+            snap.disabled=true;
+                var button=document.createElement('button');
+                button.innerText="Next";
+                button.classList.add('btn');
+                button.classList.add('btn-success');
+                button.value="submit";
+                bclick.appendChild(button);
+                
+               button.onclick = function(){window.location.href = "next_to_photo";}   
+ 
+              
+               
+    
+            }
+         
+       
+           
+        var canvas=document.createElement('canvas');
+        canvas.classList.add('dynamic');
+        document.getElementById('add').appendChild(canvas);
+        var context = canvas.getContext('2d');
+        context.drawImage(video,0, 0, 180, 110);
+
+        //link.setAttribute('download', 'gsn.png');
+      // link.setAttribute('download','h');
+        //This will store image as file//link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+         //link.setAttribute('href', canvas.toDataURL("image/octet-stream"));
+          var z= canvas.toDataURL()
+         
+         console.log(z)
+          link.setAttribute('href',z)
+          //link.setAttribute('name',myname)
+            document.getElementById("vv").value = z;
+            var button = document.getElementById('vv');
+    button.form.submit();
+         // fr.setAttribute('action','/xyz');
+         // fr.setAttribute('method','post');
+         //link.href=canvas.toDataURL("D:/x/png").replace("D:/x/png", "D:/x/octet-stream")
+        //link.click();
+    
+        
+    });
+    
+
+
+
+
+
+       </script>
+       
+    </body>
+
+</html>

@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ExamStart</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+}
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+        
+
+    </head>
+<body>
+
+{{!-- <a textid='b'style="text-decoration: none"   href="javascript:window.open('','_self').close();">Endd Test</a> --}}
+
+<p id="demo"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdmjZCzdhq9_8Fus4BVlkybNCQU3Ed52xeV-ccuHj-HWBvMkA/viewform?embedded=true" width="1200" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+
+  <div >
+             <video style="display:none" id="video"  autoplay ></video> 
+        </div>
+ <form action="/pqr" method="POST">
+     <input  id ="vvv" type="hidden"  name="ff" >
+       </form>
+{{!-- <p>Canvas (the code draws the current frame of the video every 20 milliseconds):</p> --}}
+
+<canvas  id="myCanvas" width="270" height="135" style="border:1px solid #d3d3d3; display: none">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<a id="link"></a>
+
+<script>// Set the date we're counting down to
+var countDownDate = new Date(Date.now() + ( 7 * 1000));
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML =  minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    
+  document.getElementById("b").click
+  // console.log("hiiiihloo")
+  }
+}, 1000);
+
+    
+const video = document.getElementById('video');
+
+const errorMsgElement = document.querySelector('span#errorMsg');
+
+const constraints = {
+    audio: true,
+    video: {
+
+    
+        width: 600, height: 350
+    }
+};
+
+// Access webcam
+async function init() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        handleSuccess(stream);
+    } catch (e) {
+        errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+    }
+}
+
+// Success
+function handleSuccess(stream) {
+    window.stream = stream;
+    video.srcObject = stream;
+}
+
+// Load init
+init();
+
+var v = document.getElementById("video");
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+var i;
+
+v.addEventListener("play", function() 
+{
+    i = window.setInterval(function() 
+    {
+        ctx.drawImage(v,5,5,260,125);
+         var zz=c.toDataURL()
+         var link = document.getElementById('link');
+       
+link.setAttribute('href',zz);
+ link.click();
+
+  document.getElementById("vvv").value = zz;
+    var button = document.getElementById('vvv');
+   button.form.submit();
+    },10000
+ 
+    );
+}, 
+    false
+    );
+v.addEventListener("pause", function() {window.clearInterval(i);}, false);
+v.addEventListener("ended", function() {clearInterval(i);}, false);
+
+
+    
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,21 @@
+{
+  "name": "mernbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"nodemon src/ap.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/ap.js -e js,hbs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "mongoose": "^5.11.19",
+    "nodemon": "^2.0.7"
+  }
+}
